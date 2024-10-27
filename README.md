@@ -1,4 +1,12 @@
 # StockPredictor
-Application should be able to train model and learn patterns of stock market to predict prices in 30 days period
+Небольшое приложение, которое предсказывает цену акций через 30 дней и выводит результаты предсказаний на графике
 
-**Currently don't work**
+## Команды 
+- Установка зависимостей: `pip install -r requirements.txt`
+- Загрузка и предобработка данных для создания датасета: `python preprocess.py`
+- Графически изобразить данные и созданный датасет: `python draw_data.py`
+- Протестировать натренированную модель: `python test_model.py`
+
+## Ссылки
+Для создания и тренировки модели используется **NeuralHelper**
+https://github.com/kostyanoy/NeuralHelper
