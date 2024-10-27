@@ -7,6 +7,10 @@
 - Графически изобразить данные и созданный датасет: `python draw_data.py`
 - Протестировать натренированную модель: `python test_model.py`
 
+## Основная функциональность
+Изображение данных на графике
+![example](github_images/example.JPG)
+
 ## Ссылки
 Для создания и тренировки модели используется **NeuralHelper**
 https://github.com/kostyanoy/NeuralHelper

@@ -71,7 +71,7 @@ def show_csv(step=30):
             # bars
             ax3.bar(range(len(label)), label)
             # graph
-            ax3.plot(label_dates, label, label='Close', color='red')
+            # ax3.plot(label_dates, label, label='Close', color='red')
 
             # show plot
             fig.autofmt_xdate()
