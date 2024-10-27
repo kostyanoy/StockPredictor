@@ -1,16 +1,16 @@
 import numpy as np
 
 
-# load data for model
-def load_data():
-    path = r"E:\repos\pycharmRepo\networks\StockPredictor\data\data.npy"  # full path cus can be used in other project
-    test_frac = 0.9
-
+# load raw data from file
+def load_raw_data(path):
     with open(path, 'rb') as f:
         x_data = np.load(f)
         y_data = np.load(f)
+    return x_data, y_data
 
-    # try to be same amount of liquid and non-liquid examples
+
+# try to make same amount of correct and incorrect examples
+def balance_data(x_data, y_data):
     needed_ind = np.in1d(y_data[:, 1], [0])
     needed_x = np.array(x_data[needed_ind])
     needed_y = np.array(y_data[needed_ind])
@@ -26,10 +26,25 @@ def load_data():
     x_data = x_data[indices]
     y_data = y_data[indices]
 
-    length = len(x_data)
+    return x_data, y_data
 
-    x_train, x_test = np.split(x_data, [int(length * test_frac)])
-    y_train, y_test = np.split(y_data, [int(length * test_frac)])
+
+# split data: train and test
+def split_data(x_data, y_data, train_fraction):
+    length = len(x_data)
+    x_train, x_test = np.split(x_data, [int(length * train_fraction)])
+    y_train, y_test = np.split(y_data, [int(length * train_fraction)])
+    return x_train, y_train, x_test, y_test
+
+
+# load data for model
+def load_data():
+    path = r"data/data.npy"  # path to saved data
+    train_fraction = 0.9  # part of data used for train
+
+    x_data, y_data = load_raw_data(path)
+    x_data, y_data = balance_data(x_data, y_data)
+    x_train, y_train, x_test, y_test = split_data(x_data, y_data, train_fraction)
 
     print(len(x_train))
 

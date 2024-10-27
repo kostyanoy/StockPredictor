@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 import utils
 
-# download ticker s and save to csv
+# download tickers and save to csv
 def download():
     tickers = utils.get_tickers()
     start_date = '2010-01-01'

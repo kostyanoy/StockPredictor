@@ -10,13 +10,14 @@ def test(path):
     data, labels = load_data()[:2]
 
     for i in range(10000):
-        if np.argmax(labels[i]) < 2:
-            continue
         res = model.predict(data[i].reshape(1, 90, -1))
-        print(f"Res: {res}", np.argmax(res), np.max(res))
-        print(f"Answer: {labels[i]}", np.argmax(labels[i]))
-        # print(f"Error: {res - labels[i]}")
-        input()
+        model_ans = np.argmax(res)
+        assurance = np.max(res)
+
+        print(f"Model output: {res}, Model answer: {model_ans}, Assurance: {assurance:.4f}")
+        print(f"Correct output: {labels[i]}, Correct answer: {np.argmax(labels[i])}")
+        print(f"Errors: {res - labels[i]}")
+        input("Press enter to continue")
 
 
 if __name__ == "__main__":

@@ -10,20 +10,19 @@ from preprocess import read_csv, process_raw
 
 # load data from csv (raw data)
 def show_csv(step=30):
-    files = utils.get_data_files() # csv files
+    files = utils.get_data_files()  # csv files
 
-    before_days = 90 # input days
-    after_days = 30 # output days / needed future
-
-    speed = 5 # how many days skip per step
-    time_delay = 1 # time between steps
-    sc = MinMaxScaler() # scaler
+    before_days = 90  # input days
+    after_days = 30  # output days / needed future
+    speed = 5  # how many days skip per step
+    time_delay = 1  # time between steps
+    sc = MinMaxScaler()  # scaler
     date_format = "%Y-%m-%d"
     parameters = utils.parameters
 
     # parameters / normalized / answers
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6))
-    fig.autofmt_xdate(rotation=45) # rotate date
+    fig.autofmt_xdate(rotation=45)  # rotate date
 
     for file in files:
         # check if user closed window
@@ -34,6 +33,7 @@ def show_csv(step=30):
         dates = list(map(lambda x: datetime.strptime(x, date_format), read_csv(file, ['Date'])[:, 0]))
         data = read_csv(file, parameters)
 
+        # plot graphs
         for i in range(before_days, len(data) - after_days, speed):
             if not plt.fignum_exists(fig.number):
                 break
@@ -71,12 +71,13 @@ def show_csv(step=30):
             # bars
             ax3.bar(range(len(label)), label)
             # graph
-            # ax3.plot(label_dates, label, label='Close', color='red')
+            ax3.plot(label_dates, label, label='Close', color='red')
 
             # show plot
             fig.autofmt_xdate()
             plt.draw()
             plt.pause(time_delay)
+
 
 # load data from file (preprocessed)
 def show_data(step=30):
@@ -108,6 +109,7 @@ def show_data(step=30):
         fig.autofmt_xdate()
         plt.draw()
         plt.pause(1)
+
 
 # show data
 def draw(use_csv=True, step=1):
